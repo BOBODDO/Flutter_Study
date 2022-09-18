@@ -27,7 +27,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  DateTime _selectedTime = DateTime.now();
+  String _selectedTime = '';
 
   @override
   Widget build(BuildContext context) {
@@ -39,22 +39,16 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             ElevatedButton(
               onPressed: () {
-                Future<DateTime?> selectedDate = showDatePicker(
-                    context: context,
-                    initialDate: DateTime.now(),
-                    firstDate: DateTime(2022),
-                    lastDate: DateTime(2023),
-                    builder: (context, child) => Theme(
-                        data: ThemeData.dark(),
-                        child: child!)); //null 오류를 해결하기 위하여 ! suffix 추가
+                Future<TimeOfDay?> selectedDate = showTimePicker(
+                    context: context, initialTime: TimeOfDay.now());
 
-                selectedDate.then((dateTime) {
+                selectedDate.then((timeOfDay) {
                   setState(() {
-                    _selectedTime = dateTime!;
+                    _selectedTime = '${timeOfDay!.hour} : ${timeOfDay!.minute}';
                   });
                 });
               },
-              child: Text('날짜 선택기'),
+              child: Text('시간 선택기'),
             ),
             Text('$_selectedTime 이 선택되었습니다')
           ],
