@@ -19,36 +19,52 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends StatelessWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Hero 애니메이션 샘플'),
+      ),
+      body: Center(
+        child: InkWell(
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => HeroDetailPage()));
+          },
+          child: Hero(
+            tag: 'coupon',
+            child: Image.asset(
+              'assets/banner.jpeg',
+              width: 200,
+              height: 500,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class HeroDetailPage extends StatelessWidget {
+  const HeroDetailPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('이벤트 위젯을 통해 감싼 예제'),
+      appBar: AppBar(
+        title: Text('Hero 애니메이션 샘플 - 디테일 화면'),
+      ),
+      body: Center(
+        child: Hero(
+          tag: 'coupon',
+          child: Image.asset(
+            'assets/banner.jpeg',
+          ),
         ),
-        body: Column(
-          children: [
-            GestureDetector(
-              onTap: () {
-                print('GesturdDetector 클릭!');
-              },
-              child: Text('클릭해보세요'),
-            ),
-            SizedBox(height: 200),
-            InkWell(
-              onTap: () {
-                print('물결치는 InkWell 클릭');
-              },
-              child: Text('물결치는 클릭!'),
-            )
-          ],
-        ));
+      ),
+    );
   }
 }
