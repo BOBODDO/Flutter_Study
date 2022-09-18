@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -19,51 +21,37 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Hero 애니메이션 샘플'),
-      ),
-      body: Center(
-        child: InkWell(
-          onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => HeroDetailPage()));
-          },
-          child: Hero(
-            tag: 'coupon',
-            child: Image.asset(
-              'assets/banner.jpeg',
-              width: 200,
-              height: 500,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class HeroDetailPage extends StatelessWidget {
-  const HeroDetailPage({Key? key}) : super(key: key);
+class _MyHomePageState extends State<MyHomePage> {
+  var _random_size = 100.0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Hero 애니메이션 샘플 - 디테일 화면'),
+        title: Text('중앙의 사진을 터치하면 크기가 변해요'),
       ),
       body: Center(
-        child: Hero(
-          tag: 'coupon',
-          child: Image.asset(
-            'assets/banner.jpeg',
-          ),
-        ),
+        child: InkWell(
+            onTap: () {
+              final random = Random();
+              setState(() {
+                _random_size = random.nextInt(200).toDouble() + 100;
+              });
+            },
+            child: AnimatedContainer(
+              duration: Duration(milliseconds: 500),
+              width: _random_size,
+              height: _random_size,
+              child: Image.asset('assets/banner.jpeg'),
+              curve: Curves.fastOutSlowIn,
+            )),
       ),
     );
   }
