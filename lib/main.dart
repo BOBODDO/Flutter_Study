@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: '플러터 실습',
       theme: ThemeData(
-        primarySwatch: Colors.lightBlue,
+        primarySwatch: Colors.green,
       ),
       home: MyHomePage(),
     );
@@ -24,7 +24,28 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _lists_source = ['방울복랑금', '다육이', '해외구매', '치킨이 와서', '이제 곧 먹어야 해요'];
+    final _lists_source = [
+      '방울복랑금',
+      '다육이',
+      '야생화',
+      '분재',
+      '화분',
+      '방울복랑금',
+      '다육이',
+      '야생화',
+      '분재',
+      '화분',
+      '방울복랑금',
+      '다육이',
+      '야생화',
+      '분재',
+      '화분',
+      '방울복랑금',
+      '다육이',
+      '야생화',
+      '분재',
+      '화분'
+    ];
     var lists_tiled =
         _lists_source.map((i) => ListTile(title: Text(i))).toList();
     return Scaffold(
@@ -33,9 +54,12 @@ class MyHomePage extends StatelessWidget {
           pinned: true,
           expandedHeight: 200,
           flexibleSpace: FlexibleSpaceBar(
-            title: Text('엑스플랜트'),
-            background: Image.network(
-                'https://webp2.xplant.co.kr/data/item/16507/1650709424_l1.jpg'),
+            title: Text(
+              '엑스플랜트',
+              style: TextStyle(color: Colors.white),
+            ),
+            background:
+                Image.network('https://m.xplant.co.kr/img/xplant_app_logo.png'),
           ),
         ),
         SliverList(delegate: SliverChildListDelegate(lists_tiled))
