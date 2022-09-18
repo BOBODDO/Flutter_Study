@@ -24,6 +24,9 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _lists_source = ['방울복랑금', '다육이', '해외구매', '치킨이 와서', '이제 곧 먹어야 해요'];
+    var lists_tiled =
+        _lists_source.map((i) => ListTile(title: Text(i))).toList();
     return Scaffold(
       body: CustomScrollView(slivers: [
         SliverAppBar(
@@ -35,11 +38,7 @@ class MyHomePage extends StatelessWidget {
                 'https://webp2.xplant.co.kr/data/item/16507/1650709424_l1.jpg'),
           ),
         ),
-        SliverFillRemaining(
-          child: Center(
-            child: Text('test'),
-          ),
-        )
+        SliverList(delegate: SliverChildListDelegate(lists_tiled))
       ]),
     );
   }
