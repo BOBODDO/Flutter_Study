@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 void main() {
@@ -21,38 +19,28 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends StatelessWidget {
   const MyHomePage({Key? key}) : super(key: key);
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  var _random_size = 100.0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('중앙의 사진을 터치하면 크기가 변해요'),
-      ),
-      body: Center(
-        child: InkWell(
-            onTap: () {
-              final random = Random();
-              setState(() {
-                _random_size = random.nextInt(200).toDouble() + 100;
-              });
-            },
-            child: AnimatedContainer(
-              duration: Duration(milliseconds: 500),
-              width: _random_size,
-              height: _random_size,
-              child: Image.asset('assets/banner.jpeg'),
-              curve: Curves.fastOutSlowIn,
-            )),
-      ),
+      body: CustomScrollView(slivers: [
+        SliverAppBar(
+          pinned: true,
+          expandedHeight: 200,
+          flexibleSpace: FlexibleSpaceBar(
+            title: Text('엑스플랜트'),
+            background: Image.network(
+                'https://webp2.xplant.co.kr/data/item/16507/1650709424_l1.jpg'),
+          ),
+        ),
+        SliverFillRemaining(
+          child: Center(
+            child: Text('test'),
+          ),
+        )
+      ]),
     );
   }
 }
