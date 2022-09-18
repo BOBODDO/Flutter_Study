@@ -27,30 +27,27 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String _selectedTime = '';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('탭이 들어간 APP'),
+          title: Text('이벤트 위젯을 통해 감싼 예제'),
         ),
         body: Column(
           children: [
-            ElevatedButton(
-              onPressed: () {
-                Future<TimeOfDay?> selectedDate = showTimePicker(
-                    context: context, initialTime: TimeOfDay.now());
-
-                selectedDate.then((timeOfDay) {
-                  setState(() {
-                    _selectedTime = '${timeOfDay!.hour} : ${timeOfDay!.minute}';
-                  });
-                });
+            GestureDetector(
+              onTap: () {
+                print('GesturdDetector 클릭!');
               },
-              child: Text('시간 선택기'),
+              child: Text('클릭해보세요'),
             ),
-            Text('$_selectedTime 이 선택되었습니다')
+            SizedBox(height: 200),
+            InkWell(
+              onTap: () {
+                print('물결치는 InkWell 클릭');
+              },
+              child: Text('물결치는 클릭!'),
+            )
           ],
         ));
   }
